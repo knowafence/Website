@@ -9,7 +9,9 @@
 <body>
   <header class="site-header">
     <div class="container header-content">
-      <div class="logo">Know A Fence</div>
+      <a href="index.html" class="logo">
+		  <img src="images/kaflogo.png" alt="Know A Fence">
+		</a>
       <nav class="main-nav">
         <a href="index.html" class="active">Home</a>
         <a href="testimonials.html">Testimonials</a>
@@ -21,6 +23,8 @@
       </div>
     </div>
   </header>
+  
+<div class="picket-strip"></div>
 
   <main>
     <section class="hero">
@@ -104,30 +108,34 @@
           </ul>
         </div>
         <div>
-          <form class="contact-form">
-            <h3>Request a Free Estimate</h3>
-            <label for="name">Name</label>
-            <input id="name" type="text" name="name" placeholder="Your name" required>
+		<form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+		<input type="hidden" name="access_key" value="6f35e4fc-c415-4ddc-8c07-fc8ab3e4d5f6">
+		<input type="hidden" name="subject" value="New estimate request from Know A Fence website">
+		<input type="hidden" name="from_name" value="Know A Fence Website">
+		  <h3>Request a Free Estimate</h3>
 
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" placeholder="your@email.com" required>
+		  <label for="name">Name</label>
+		  <input id="name" type="text" name="name" placeholder="Your name" required>
 
-            <label for="phone">Phone</label>
-            <input id="phone" type="tel" name="phone" placeholder="(401) 555-1234">
+		  <label for="email">Email</label>
+		  <input id="email" type="email" name="email" placeholder="your@email.com" required>
 
-            <label for="service">Type of Project</label>
-            <select id="service" name="service">
-              <option>Residential Fence</option>
-              <option>Commercial Fence</option>
-              <option>Fence Repair</option>
-              <option>Other</option>
-            </select>
+		  <label for="phone">Phone</label>
+		  <input id="phone" type="tel" name="phone" placeholder="(401) 555-1234">
 
-            <label for="message">Project Details</label>
-            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project"></textarea>
+		  <label for="service">Type of Project</label>
+		  <select id="service" name="service">
+			<option>Residential Fence</option>
+			<option>Commercial Fence</option>
+			<option>Fence Repair</option>
+			<option>Other</option>
+		  </select>
 
-            <button type="submit" class="btn btn-full">Send Request</button>
-          </form>
+		  <label for="message">Project Details</label>
+		  <textarea id="message" name="message" rows="4" placeholder="Tell us about your project"></textarea>
+
+		  <button type="submit" class="btn btn-full">Send Request</button>
+		</form>
         </div>
       </div>
     </section>
