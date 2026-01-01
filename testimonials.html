@@ -32,29 +32,42 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container testimonials-grid">
-        <article class="testimonial">
-          <p class="testimonial-text">“Know A Fence did an amazing job on our new privacy fence. The crew was on time, professional, and left our yard spotless.”</p>
-          <p class="testimonial-name">— Sarah M., West Warwick</p>
-        </article>
+<section class="section">
+  <div class="container">
+    <div class="testimonial-carousel">
+      <button class="carousel-btn prev" aria-label="Previous testimonial">&#10094;</button>
 
-        <article class="testimonial">
-          <p class="testimonial-text">“From quote to installation, everything was straightforward and stress-free. The fence looks great and really improves our curb appeal.”</p>
-          <p class="testimonial-name">— James R., Cranston</p>
-        </article>
+			  <div class="testimonial-track">
+		  <article class="testimonial active">
+			<img src="images/testimonials/chad.jpg"
+				 alt="Fence repair project for Chad in Coventry"
+				 class="testimonial-image">
+			<p class="testimonial-text">“Shortly after we moved into our new home our fence blew over. We contacted Know-A-Fence and Rob was doing the repairs soon after. He explained what caused the fence to fall and what steps he took to make sure it wouldn’t happen again. Rob goes above and beyond to make sure he meets client needs while providing quality service. We couldn’t recommend him enough.”</p>
+			<p class="testimonial-name">— Chad D., Coventry</p>
+		  </article>
 
-        <article class="testimonial">
-          <p class="testimonial-text">“We needed secure fencing around our commercial property. Know A Fence delivered exactly what we were looking for, on time and on budget.”</p>
-          <p class="testimonial-name">— GreenLine Storage, Warwick</p>
-        </article>
+		  <article class="testimonial">
+			<img src="images/testimonials/james.jpg"
+				 alt="Fence installation for James in Cranston"
+				 class="testimonial-image">
+			<p class="testimonial-text">“From quote to installation, everything was straightforward and stress-free. The fence looks great and really improves our curb appeal.”</p>
+			<p class="testimonial-name">— James R., Cranston</p>
+		  </article>
 
-        <article class="testimonial">
-          <p class="testimonial-text">“They repaired several damaged sections of our old fence and it looks brand new. Highly recommended.”</p>
-          <p class="testimonial-name">— Emily T., Providence</p>
-        </article>
-      </div>
-    </section>
+		</div>
+
+      <button class="carousel-btn next" aria-label="Next testimonial">&#10095;</button>
+    </div>
+
+    <div class="carousel-dots">
+      <button class="dot active" aria-label="Go to testimonial 1"></button>
+      <button class="dot" aria-label="Go to testimonial 2"></button>
+      <button class="dot" aria-label="Go to testimonial 3"></button>
+      <button class="dot" aria-label="Go to testimonial 4"></button>
+    </div>
+  </div>
+</section>
+
 
     <section class="section section-alt">
       <div class="container callout">
@@ -70,5 +83,74 @@
       <p>&copy; 2026 Know A Fence. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+  (function () {
+    const testimonials = document.querySelectorAll('.testimonial-track .testimonial');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    let currentIndex = 0;
+    let autoplayId = null;
+
+    function showSlide(index) {
+      testimonials.forEach((t, i) => {
+        t.classList.toggle('active', i === index);
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentIndex + 1) % testimonials.length;
+      showSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      showSlide(prevIndex);
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = setInterval(nextSlide, 7000); // 7 seconds per testimonial
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    nextBtn.addEventListener('click', function () {
+      nextSlide();
+      startAutoplay();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      prevSlide();
+      startAutoplay();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', function () {
+        showSlide(index);
+        startAutoplay();
+      });
+    });
+
+    // Pause on hover for better UX
+    const carousel = document.querySelector('.testimonial-carousel');
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    // Init
+    showSlide(0);
+    startAutoplay();
+  })();
+</script>
+
 </body>
 </html>

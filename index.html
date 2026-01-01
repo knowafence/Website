@@ -62,6 +62,29 @@
         </div>
       </div>
     </section>
+	
+	    <!-- Project Gallery Carousel -->
+<section class="section section-alt" >
+  <div class="container">
+    <h2>Project Gallery</h2>
+    <p>Here are a few examples of recent fence projects completed by Know A Fence across Rhode Island.</p>
+
+    <div class="image-carousel">
+      <button class="img-carousel-btn img-prev" aria-label="Previous image">❮</button>
+
+      <div class="image-track">
+        <figure class="image-slide img-active">
+          <img src="images/indexcarousel/gallery-1.jpg" alt="Fence project photo">
+        </figure>
+      </div>
+
+      <button class="img-carousel-btn img-next" aria-label="Next image">❯</button>
+    </div>
+
+    <div class="img-carousel-dots"></div>
+  </div>
+</section>
+
 
     <section class="section section-alt">
       <div class="container">
@@ -76,7 +99,7 @@
           <h2>Contact Us</h2>
           <p>Have a project in mind? Reach out today and get a free, no-obligation estimate.</p>
           <ul class="contact-list">
-            <li><strong>Phone:</strong> (401) 579-1657</li>
+            <li><strong>Phone:</strong> (401) 405-1346</li>
             <li><strong>Email:</strong> quotes@knowafenceri.com</li>
           </ul>
         </div>
@@ -116,5 +139,95 @@
       <p>Licensed & Insured • RI Contractor #000000</p>
     </div>
   </footer>
+<script>
+  (function () {
+    const imageFiles = [
+      'images/indexcarousel/gallery-1.jpg',
+      'images/indexcarousel/gallery-2.jpg',
+      'images/indexcarousel/gallery-3.jpg',
+      'images/indexcarousel/gallery-4.jpg',
+      'images/indexcarousel/gallery-5.jpg',
+      'images/indexcarousel/gallery-6.jpg',
+      'images/indexcarousel/gallery-7.jpg',
+      'images/indexcarousel/gallery-8.jpg',
+      'images/indexcarousel/gallery-9.jpg',
+      'images/indexcarousel/gallery-10.jpg',
+      'images/indexcarousel/gallery-11.jpg',
+      'images/indexcarousel/gallery-12.jpg',
+      'images/indexcarousel/gallery-13.jpg',
+      'images/indexcarousel/gallery-14.jpg'
+    ];
+
+    const imgElement = document.querySelector('.image-slide img');
+    const dotsContainer = document.querySelector('.img-carousel-dots');
+    const prevBtn = document.querySelector('.img-carousel-btn.img-prev');
+    const nextBtn = document.querySelector('.img-carousel-btn.img-next');
+
+    let currentIndex = 0;
+    let autoplayId = null;
+
+    // Create dots based on number of images
+    const dots = imageFiles.map((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'img-dot' + (index === 0 ? ' img-active' : '');
+      dot.setAttribute('aria-label', 'Go to image ' + (index + 1));
+      dot.addEventListener('click', function () {
+        showImage(index);
+        startAutoplay();
+      });
+      dotsContainer.appendChild(dot);
+      return dot;
+    });
+
+    function showImage(index) {
+      currentIndex = index;
+      imgElement.src = imageFiles[index];
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('img-active', i === index);
+      });
+    }
+
+    function nextImage() {
+      const nextIndex = (currentIndex + 1) % imageFiles.length;
+      showImage(nextIndex);
+    }
+
+    function prevImage() {
+      const prevIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+      showImage(prevIndex);
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = setInterval(nextImage, 6000); // 6 seconds
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    prevBtn.addEventListener('click', function () {
+      prevImage();
+      startAutoplay();
+    });
+
+    nextBtn.addEventListener('click', function () {
+      nextImage();
+      startAutoplay();
+    });
+
+    const gallery = document.querySelector('.image-carousel');
+    gallery.addEventListener('mouseenter', stopAutoplay);
+    gallery.addEventListener('mouseleave', startAutoplay);
+
+    // Initialize
+    showImage(0);
+    startAutoplay();
+  })();
+</script>
 </body>
 </html>
